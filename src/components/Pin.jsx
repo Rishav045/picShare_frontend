@@ -31,11 +31,11 @@ const Pin = ({ pin }) => {
 
   alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
-  const savePin = (id) => {
+  const savePin = async(id) => {
     if (alreadySaved?.length === 0) {
-      setSavingPost(true);
+       setSavingPost(true);
 
-      client
+      await client
         .patch(id)
         .setIfMissing({ save: [] })
         .insert('after', 'save[-1]', [{
