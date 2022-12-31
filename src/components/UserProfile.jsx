@@ -45,8 +45,8 @@ const UserProfile = () => {
     }
   }, [text, userId]);
 
-  const logout = () => {
-    localStorage.clear();
+  const async logout = () => {
+   await localStorage.clear();
 
     navigate('/login');
   };
