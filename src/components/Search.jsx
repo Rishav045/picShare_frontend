@@ -8,18 +8,18 @@ const Search = ({searchTerm}) => {
   const [pins, setPins] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(async() => {
+  useEffect(() => {
     if(searchTerm){
       setLoading(true);
       const query = searchQuery(searchTerm.toLowerCase());
-      await client.fetch(query)
+       client.fetch(query)
       .then((data)=>{
         setPins(data);
         setLoading(false);
       })
 
     }else{
-      await client.fetch(feedQuery)
+       client.fetch(feedQuery)
       .then((data)=>{
         setPins(data);
         setLoading(false);

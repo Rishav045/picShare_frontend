@@ -10,24 +10,29 @@ const Feed = () => {
     const [loading, setloading] = useState(false);
     const [pins, setpins] = useState(null);
     const {categoryId} =useParams();
-    useEffect(async() => {
-        setloading(true);
+    useEffect(() => {
+        (async ()=>{
+            setloading(true);
         if(categoryId)
         {
             const query = searchQuery(categoryId);
 
-            await client.fetch(query)
+             await client.fetch(query)
             .then((data)=>{
                 setpins(data);
                 setloading(false);
             })
         } else{
-                await client.fetch(feedQuery)
+                 await client.fetch(feedQuery)
+                 
                 .then((data)=>{
+                    console.log(data);
                     setpins(data);
                     setloading(false);
                 })
         }
+        })();
+        
     }, [categoryId]);
     if(loading) return <Spinner message="We are adding new ideas to your feed !"/>
 
