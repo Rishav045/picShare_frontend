@@ -22,24 +22,24 @@ const UserProfile = () => {
 
   const User = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
 
-  useEffect(() => {
+  useEffect(async() => {
     const query = userQuery(userId);
-    client.fetch(query).then((data) => {
+    await client.fetch(query).then((data) => {
       setUser(data[0]);
     });
   }, [userId]);
 
-  useEffect(() => {
+  useEffect(async() => {
     if (text === 'Created') {
       const createdPinsQuery = userCreatedPinsQuery(userId);
 
-      client.fetch(createdPinsQuery).then((data) => {
+      await client.fetch(createdPinsQuery).then((data) => {
         setPins(data);
       });
     } else {
       const savedPinsQuery = userSavedPinsQuery(userId);
 
-      client.fetch(savedPinsQuery).then((data) => {
+      await client.fetch(savedPinsQuery).then((data) => {
         setPins(data);
       });
     }

@@ -10,19 +10,19 @@ const Feed = () => {
     const [loading, setloading] = useState(false);
     const [pins, setpins] = useState(null);
     const {categoryId} =useParams();
-    useEffect(() => {
+    useEffect(async() => {
         setloading(true);
         if(categoryId)
         {
             const query = searchQuery(categoryId);
 
-            client.fetch(query)
+            await client.fetch(query)
             .then((data)=>{
                 setpins(data);
                 setloading(false);
             })
         } else{
-                client.fetch(feedQuery)
+                await client.fetch(feedQuery)
                 .then((data)=>{
                     setpins(data);
                     setloading(false);

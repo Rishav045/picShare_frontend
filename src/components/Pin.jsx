@@ -18,8 +18,8 @@ const Pin = ({ pin }) => {
 
   const user = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
 
-  const deletePin = (id) => {
-    client
+  const deletePin = async(id) => {
+    await client
       .delete(id)
       .then(() => {
         window.location.reload();
@@ -31,11 +31,11 @@ const Pin = ({ pin }) => {
 
   alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
-  const savePin = (id) => {
+  const savePin = async (id) => {
     if (alreadySaved?.length === 0) {
        setSavingPost(true);
 
-       client
+       await client
         .patch(id)
         .setIfMissing({ save: [] })
         .insert('after', 'save[-1]', [{

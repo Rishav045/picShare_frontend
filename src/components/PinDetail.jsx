@@ -15,11 +15,11 @@ const PinDetail = ({ user }) => {
   const [comment, setComment] = useState('');
   const [addingComment, setAddingComment] = useState(false);
 
-  const fetchPinDetails = () => {
+  const fetchPinDetails = async() => {
     const query = pinDetailQuery(pinId);
 
     if (query) {
-      client.fetch(`${query}`).then((data) => {
+      await client.fetch(`${query}`).then((data) => {
         setPinDetail(data[0]);
         console.log(data);
         if (data[0]) {
@@ -32,7 +32,7 @@ const PinDetail = ({ user }) => {
     }
   };
 
-  useEffect(() => {
+  useEffect( () => {
     fetchPinDetails();
   }, [pinId]);
 
